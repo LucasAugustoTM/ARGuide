@@ -3,7 +3,17 @@ guid: 2c33078379885474c98e163c2b5ae8f8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Borda
+    second: {fileID: 2100000, guid: 380fc32f46087344f83a612a45b64315, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Centro
+    second: {fileID: 2100000, guid: 1b3a39470a70db94d9ff6bffd0e81ecc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

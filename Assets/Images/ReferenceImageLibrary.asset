@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
+  m_Name: ReferenceImageLibrary
+  m_EditorClassIdentifier: 
+  m_GuidLow: 5230801737235590723
+  m_GuidHigh: 18017421056836791951
+  m_DataStore:
+    m_Storage: []
+  m_Images:
+  - m_SerializedGuid:
+      m_GuidLow: 5348406422848498797
+      m_GuidHigh: 9566313193776157077
+    m_SerializedTextureGuid:
+      m_GuidLow: 4847199299379690126
+      m_GuidHigh: 15880750562914553610
+    m_Size: {x: 0.104775, y: 0.100231186}
+    m_SpecifySize: 1
+    m_Name: botao
+    m_Texture: {fileID: 2800000, guid: cb0c7a8eb61443440a4f1b457fc263dc, type: 3}
+  - m_SerializedGuid:
+      m_GuidLow: 4707252159710124572
+      m_GuidHigh: 2870152559187867271
+    m_SerializedTextureGuid:
+      m_GuidLow: 8305884484231109546
+      m_GuidHigh: 7652470049881015416
+    m_Size: {x: 0.104775, y: 0.09974791}
+    m_SpecifySize: 1
+    m_Name: cnc
+    m_Texture: {fileID: 2800000, guid: 94061baa6dee734478447941f708336a, type: 3}
+  - m_SerializedGuid:
+      m_GuidLow: 5475511325782306197
+      m_GuidHigh: 2817765076987644853
+    m_SerializedTextureGuid:
+      m_GuidLow: 4324761695454692908
+      m_GuidHigh: 12599546452698396536
+    m_Size: {x: 0.104775, y: 0.099509925}
+    m_SpecifySize: 1
+    m_Name: interruptor
+    m_Texture: {fileID: 2800000, guid: 33cb062ca3d93c0478f71e54be94daae, type: 3}

@@ -34,11 +34,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-       //[SerializeField]
-        //[HideInInspector]
-        //List<NamedPrefab> m_PrefabsList = new List<NamedPrefab>();
 
-        Dictionary<Guid, GameObject> m_PrefabsDictionary = new Dictionary<Guid, GameObject>();
+        Dictionary<Guid, GameObject> m_PrefabsDictionary;
         Dictionary<Guid, GameObject> m_Instantiated = new Dictionary<Guid, GameObject>();
         ARTrackedImageManager m_TrackedImageManager;
 
@@ -54,30 +51,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             get => m_ImageLibrary;
             set => m_ImageLibrary = value;
         }
-
-        /*public void OnBeforeSerialize()
-        {
-            m_PrefabsList.Clear();
-            foreach (var kvp in m_PrefabsDictionary)
-            {
-                m_PrefabsList.Add(new NamedPrefab(kvp.Key, kvp.Value));
-            }
-        }
-
-        public void OnAfterDeserialize()
-        {
-            m_PrefabsDictionary = new Dictionary<Guid, GameObject>();
-            foreach (var entry in m_PrefabsList)
-            {
-                m_PrefabsDictionary.Add(Guid.Parse(entry.imageGuid), entry.imagePrefab);
-            }
-        }*/
-
-        public void InitPrefabForReferenceImage(XRReferenceImage referenceImage, GameObject alternativePrefab)
-        {
-            //NamedPrefab novo = new NamedPrefab
-            m_PrefabsDictionary.Add(referenceImage.guid, alternativePrefab);
-        }
+        
 
         void Awake()
         {
@@ -95,7 +69,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_TrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
         }
 
-        void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
+         void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
         {
             foreach (var trackedImage in eventArgs.added)
             {
@@ -106,15 +80,23 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
+
+        public void InitPrefabForReferenceImage(XRReferenceImage referenceImage, GameObject alternativePrefab)
+        {
+            m_PrefabsDictionary.Add(referenceImage.guid, alternativePrefab);
+        }
+
+       
+        
         void AssignPrefab(ARTrackedImage trackedImage)
         {
             if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
                 m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
         }
-
-        /*public GameObject GetPrefabForReferenceImage(XRReferenceImage referenceImage)
-            => m_PrefabsDictionary.TryGetValue(referenceImage.guid, out var prefab) ? prefab : null;*/
-
+        
+        public GameObject GetPrefabForReferenceImage(XRReferenceImage referenceImage)
+            => m_PrefabsDictionary.TryGetValue(referenceImage.guid, out var prefab) ? prefab : null;
+        
         public void SetPrefabForReferenceImage(XRReferenceImage referenceImage, GameObject alternativePrefab)
         {
             m_PrefabsDictionary[referenceImage.guid] = alternativePrefab;
@@ -125,100 +107,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-/*#if UNITY_EDITOR
-        /// <summary>
-        /// This customizes the inspector component and updates the prefab list when
-        /// the reference image library is changed.
-        /// </summary>
-        [CustomEditor(typeof(PrefabImagePairManager))]
-        class PrefabImagePairManagerInspector : Editor
-        {
-            List<XRReferenceImage> m_ReferenceImages = new List<XRReferenceImage>();
-            bool m_IsExpanded = true;
 
-            bool HasLibraryChanged(XRReferenceImageLibrary library)
-            {
-                if (library == null)
-                    return m_ReferenceImages.Count == 0;
-
-                if (m_ReferenceImages.Count != library.count)
-                    return true;
-
-                for (int i = 0; i < library.count; i++)
-                {
-                    if (m_ReferenceImages[i] != library[i])
-                        return true;
-                }
-
-                return false;
-            }
-
-            public override void OnInspectorGUI()
-            {
-                //customized inspector
-                var behaviour = serializedObject.targetObject as PrefabImagePairManager;
-
-                serializedObject.Update();
-                using (new EditorGUI.DisabledScope(true))
-                {
-                    EditorGUILayout.PropertyField(serializedObject.FindProperty("m_Script"));
-                }
-
-                var libraryProperty = serializedObject.FindProperty(nameof(m_ImageLibrary));
-                EditorGUILayout.PropertyField(libraryProperty);
-                var library = libraryProperty.objectReferenceValue as XRReferenceImageLibrary;
-
-                //check library changes
-                if (HasLibraryChanged(library))
-                {
-                    if (library)
-                    {
-                        var tempDictionary = new Dictionary<Guid, GameObject>();
-                        foreach (var referenceImage in library)
-                        {
-                            tempDictionary.Add(referenceImage.guid, behaviour.GetPrefabForReferenceImage(referenceImage));
-                        }
-                        behaviour.m_PrefabsDictionary = tempDictionary;
-                    }
-                }
-
-                // update current
-                m_ReferenceImages.Clear();
-                if (library)
-                {
-                    foreach (var referenceImage in library)
-                    {
-                        m_ReferenceImages.Add(referenceImage);
-                    }
-                }
-
-                //show prefab list
-                m_IsExpanded = EditorGUILayout.Foldout(m_IsExpanded, "Prefab List");
-                if (m_IsExpanded)
-                {
-                    using (new EditorGUI.IndentLevelScope())
-                    {
-                        EditorGUI.BeginChangeCheck();
-
-                        var tempDictionary = new Dictionary<Guid, GameObject>();
-                        foreach (var image in library)
-                        {
-                            var prefab = (GameObject) EditorGUILayout.ObjectField(image.name, behaviour.m_PrefabsDictionary[image.guid], typeof(GameObject), false);
-                            tempDictionary.Add(image.guid, prefab);
-                        }
-
-                        if (EditorGUI.EndChangeCheck())
-                        {
-                            Undo.RecordObject(target, "Update Prefab");
-                            behaviour.m_PrefabsDictionary = tempDictionary;
-                            EditorUtility.SetDirty(target);
-                        }
-                    }
-                }
-
-                serializedObject.ApplyModifiedProperties();
-            }
-        }
-#endif*/
     }
 }

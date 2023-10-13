@@ -15,7 +15,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
     /// and overlays some prefabs on top of the detected image.
     /// </summary>
     [RequireComponent(typeof(ARTrackedImageManager))]
-    public class PrefabImagePairManager : MonoBehaviour, ISerializationCallbackReceiver
+    public class PrefabImagePairManager : MonoBehaviour//, ISerializationCallbackReceiver
     {
         /// <summary>
         /// Used to associate an `XRReferenceImage` with a Prefab by using the `XRReferenceImage`'s guid as a unique identifier for a particular reference image.
@@ -34,9 +34,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-        [SerializeField]
-        [HideInInspector]
-        List<NamedPrefab> m_PrefabsList = new List<NamedPrefab>();
+       //[SerializeField]
+        //[HideInInspector]
+        //List<NamedPrefab> m_PrefabsList = new List<NamedPrefab>();
 
         Dictionary<Guid, GameObject> m_PrefabsDictionary = new Dictionary<Guid, GameObject>();
         Dictionary<Guid, GameObject> m_Instantiated = new Dictionary<Guid, GameObject>();
@@ -55,7 +55,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             set => m_ImageLibrary = value;
         }
 
-        public void OnBeforeSerialize()
+        /*public void OnBeforeSerialize()
         {
             m_PrefabsList.Clear();
             foreach (var kvp in m_PrefabsDictionary)
@@ -71,10 +71,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 m_PrefabsDictionary.Add(Guid.Parse(entry.imageGuid), entry.imagePrefab);
             }
+        }*/
+
+        public void InitPrefabForReferenceImage(XRReferenceImage referenceImage, GameObject alternativePrefab)
+        {
+            //NamedPrefab novo = new NamedPrefab
+            m_PrefabsDictionary.Add(referenceImage.guid, alternativePrefab);
         }
 
         void Awake()
         {
+            m_PrefabsDictionary = new Dictionary<Guid, GameObject>();
             m_TrackedImageManager = GetComponent<ARTrackedImageManager>();
         }
 
@@ -105,8 +112,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
         }
 
-        public GameObject GetPrefabForReferenceImage(XRReferenceImage referenceImage)
-            => m_PrefabsDictionary.TryGetValue(referenceImage.guid, out var prefab) ? prefab : null;
+        /*public GameObject GetPrefabForReferenceImage(XRReferenceImage referenceImage)
+            => m_PrefabsDictionary.TryGetValue(referenceImage.guid, out var prefab) ? prefab : null;*/
 
         public void SetPrefabForReferenceImage(XRReferenceImage referenceImage, GameObject alternativePrefab)
         {
@@ -118,7 +125,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-#if UNITY_EDITOR
+/*#if UNITY_EDITOR
         /// <summary>
         /// This customizes the inspector component and updates the prefab list when
         /// the reference image library is changed.
@@ -212,6 +219,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 serializedObject.ApplyModifiedProperties();
             }
         }
-#endif
+#endif*/
     }
 }

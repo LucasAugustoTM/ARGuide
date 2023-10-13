@@ -1,0 +1,4 @@
+botao,Placa1
+cnc,Placa2
+botao,Placa3
+cnc,Placa4

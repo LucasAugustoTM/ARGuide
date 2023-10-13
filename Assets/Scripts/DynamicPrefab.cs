@@ -3,6 +3,9 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using System.IO;
+using System.Collections.Generic;
+
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -13,9 +16,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
     public class DynamicPrefab : MonoBehaviour
     {
         GameObject m_OriginalPrefab;
+        bool first = true;
 
         [SerializeField]
         GameObject m_AlternativePrefab;
+
+        public TextAsset ordem;
+        List<List<string>> m_Ordem;
 
         public GameObject alternativePrefab
         {
@@ -36,6 +43,27 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         string m_ErrorMessage = "";
 
+        void Start() {
+
+            m_Ordem = new List<List<string>>();
+            string[] linesInFile = ordem.text.Split('\n');
+            foreach (string line in linesInFile)
+            {
+                List<string> virgulas = new List<string>(line.Split(','));
+                m_Ordem.Add(virgulas);
+            }
+
+            //string p = m_Ordem[2][1];
+            //Debug.Log(p);
+    
+            var manager = GetComponent<PrefabImagePairManager>();
+            var library = manager.imageLibrary;
+            foreach (var referenceImage in library) {   
+                    var newPrefab = (GameObject)Resources.Load("Cubes");                 
+                    manager.InitPrefabForReferenceImage(referenceImage, newPrefab);
+            }
+        }
+
         void OnGUI()
         {
             var fontSize = 50;
@@ -49,17 +77,18 @@ namespace UnityEngine.XR.ARFoundation.Samples
             switch (m_State)
             {
                 case State.OriginalPrefab:
-                {
-                    if (GUILayout.Button($"Alternative Prefab for {GetComponent<PrefabImagePairManager>().imageLibrary[0].name}"))
-                    {
-                        m_State = State.ChangeToAlternativePrefab;
-                    }
+                { //if (GUILayout.Button($"Alternative Prefab for {GetComponent<PrefabImagePairManager>().imageLibrary[0].name}"))
+                        if (GUILayout.Button($"Alternative Prefab for all images"))
+                        {
+                            m_State = State.ChangeToAlternativePrefab;
+                        }
 
                     break;
+                    
                 }
                 case State.AlternativePrefab:
                 {
-                    if (GUILayout.Button($"Original Prefab for {GetComponent<PrefabImagePairManager>().imageLibrary[0].name}"))
+                    if (GUILayout.Button($"Original Prefab for all images"))
                     {
                         m_State = State.ChangeToOriginalPrefab;
                     }
@@ -107,11 +136,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
                         break;
                     }
 
-                    if (!m_OriginalPrefab)
-                        m_OriginalPrefab = manager.GetPrefabForReferenceImage(library[0]);
+                    foreach (var referenceImage in library) { 
+                        if (first==true) {                                                     
+                            m_OriginalPrefab = manager.GetPrefabForReferenceImage(referenceImage);
+                        }    
 
-                    manager.SetPrefabForReferenceImage(library[0], alternativePrefab);
-                    m_State = State.AlternativePrefab;
+                        var newPrefab = (GameObject)Resources.Load("qr");                 
+                        manager.SetPrefabForReferenceImage(referenceImage, newPrefab);
+                        m_State = State.AlternativePrefab;                  
+                    }
+                    first = false;
                     break;
                 }
 
@@ -136,9 +170,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                         SetError($"No image library available.");
                         break;
                     }
-
-                    manager.SetPrefabForReferenceImage(library[0], m_OriginalPrefab);
-                    m_State = State.OriginalPrefab;
+                    foreach (var referenceImage in library) { 
+                        manager.SetPrefabForReferenceImage(referenceImage, m_OriginalPrefab);
+                        m_State = State.OriginalPrefab;
+                    }    
                     break;
                 }
             }

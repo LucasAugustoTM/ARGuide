@@ -1,4 +1,4 @@
-botao,Placa1
-cnc,Placa2
-botao,Placa3
-cnc,Placa4
+botao,Placa1,Cubes
+cnc,Placa2,Cubes
+botao,Placa3,Cubes
+cnc,Placa4,Cubes

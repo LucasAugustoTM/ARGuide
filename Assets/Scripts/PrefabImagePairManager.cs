@@ -107,6 +107,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
+        /*public void Clear() {
+            foreach(var key in m_Instantiated.Keys) {
+                m_Instantiated.TryGetValue(key, out var instantiatedPrefab);
+                m_Instantiated[key] = Instantiate(instantiatedPrefab, instantiatedPrefab.transform.parent);
+                Destroy(instantiatedPrefab);
+            }
+            Debug.Log("aaaaaaaaaa");
+            //OnDisable();
+        }*/
+
 
     }
 }

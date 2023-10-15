@@ -17,27 +17,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
     {
         GameObject m_OriginalPrefab;
         int passo = 0;
+        bool first = true;
 
         public TextAsset ordem;
         List<List<string>> m_Ordem;
 
-        /*[SerializeField]
-        GameObject m_AlternativePrefab;
-
-        public GameObject alternativePrefab
-        {
-            get => m_AlternativePrefab;
-            set => m_AlternativePrefab = value;
-        }*/
-
         enum State
         {
             OriginalPrefab,
-            ChangeToOriginalPrefab,
-            AlternativePrefab,
-            ChangeToAlternativePrefab,
-            NextPrefab,
-            LastPrefab,
             MudaPrefab,
             Error
         }
@@ -50,7 +37,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             var manager = GetComponent<PrefabImagePairManager>();
             var library = manager.imageLibrary;
 
-            if(passo < m_Ordem.Count) {
+            Debug.Log("passo no change: "+passo);
+            Debug.Log("ordem.Count no change: "+passo);
+            if((passo >= 0) & (passo < m_Ordem.Count)) {
                 var yesPrefab = (GameObject)Resources.Load(m_Ordem[passo][1]); 
                 Debug.Log(yesPrefab);
                 
@@ -71,21 +60,23 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 try {
                 Debug.Log("noprefab: "+noPrefab.GetType()); }
                 catch (Exception e){Debug.Log("pinto "+noPrefab);}
-                Debug.Log("passo: "+m_Ordem[passo][2].GetType());
+                Debug.Log("passo jklkljk: "+m_Ordem[passo][2].GetType());
 
                 foreach (var referenceImage in library) {
                     Debug.Log(referenceImage.name);
                     if(String.Equals(m_Ordem[passo][0], referenceImage.name)) {
                         Debug.Log("Nome certo!");
-                        if(passo==0) {
+                        if(first==true) {
                             manager.InitPrefabForReferenceImage(referenceImage, yesPrefab);
+                            first = false;
                             Debug.Log("Inicializou o certo!"); }
                         else
                             manager.SetPrefabForReferenceImage(referenceImage, yesPrefab);
                     }else{
                         Debug.Log("Nome errado!");
-                        if(passo==0) {
+                        if(first==true) {
                             manager.InitPrefabForReferenceImage(referenceImage, noPrefab);
+                            first = false;
                             Debug.Log("Inicializou o errado!"); }
                         else
                             manager.SetPrefabForReferenceImage(referenceImage, noPrefab);
@@ -96,6 +87,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void Start() {
 
+            Debug.Log("passo no start: "+passo);
             m_Ordem = new List<List<string>>();
             string[] linesInFile = ordem.text.Split('\n');
             foreach (string line in linesInFile)
@@ -109,20 +101,24 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 }
             }
 
-            //string p = m_Ordem[2][1];
-            //Debug.Log(p);
-    
-            /*var manager = GetComponent<PrefabImagePairManager>();
-            var library = manager.imageLibrary;
-            foreach (var referenceImage in library) {   
-                    var newPrefab = (GameObject)Resources.Load("Cubes");                 
-                    manager.InitPrefabForReferenceImage(referenceImage, newPrefab);
-            }*/
             ChangePrefab();
             
         }
 
-        void OnGUI()
+        public void nextStep() {
+            passo +=1;
+            Debug.Log("passo no next: "+passo);
+            m_State = State.MudaPrefab;
+        }
+
+        public void lastStep() {
+            passo -=1;
+            Debug.Log("passo no last: "+passo);
+            m_State = State.MudaPrefab;
+        }
+
+
+        /*void OnGUI()
         {
             var fontSize = 50;
             GUI.skin.button.fontSize = fontSize;
@@ -162,7 +158,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             GUILayout.EndHorizontal();
             //GUILayout.EndArea();
         
-        }
+        }*/
 
         void SetError(string errorMessage)
         {

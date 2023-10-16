@@ -57,9 +57,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
                         Debug.Log("Tipo l2: "+l2.GetType());}
                 }
                 Debug.Log("yesprefab: "+yesPrefab.GetType());
-                try {
-                Debug.Log("noprefab: "+noPrefab.GetType()); }
-                catch (Exception e){Debug.Log("pinto "+noPrefab);}
                 Debug.Log("passo jklkljk: "+m_Ordem[passo][2].GetType());
 
                 foreach (var referenceImage in library) {

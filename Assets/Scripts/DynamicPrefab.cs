@@ -114,49 +114,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_State = State.MudaPrefab;
         }
 
-
-        /*void OnGUI()
-        {
-            var fontSize = 50;
-            GUI.skin.button.fontSize = fontSize;
-            GUI.skin.label.fontSize = fontSize;
-
-            float margin = 100;
-
-            GUILayout.BeginHorizontal("box");
-
-            //GUILayout.BeginArea(new Rect(margin, margin, Screen.width - margin * 2, Screen.height - margin * 2));
-            //GUILayout.BeginArea(new Rect(margin, margin, Screen.width - margin * 2, Screen.height - margin * 2));
-
-            switch (m_State)
-            {
-                case State.OriginalPrefab:
-                { //if (GUILayout.Button($"Alternative Prefab for {GetComponent<PrefabImagePairManager>().imageLibrary[0].name}"))
-                        if (GUILayout.Button($"Próximo"))
-                        {
-                            passo +=1;
-                            m_State = State.MudaPrefab;
-                        }
-                        else if (GUILayout.Button($"Anterior")) {
-                            passo -=1;
-                            m_State = State.MudaPrefab;
-                        }
-
-                    break;
-                    
-                }
-
-                case State.Error:
-                {
-                    GUILayout.Label(m_ErrorMessage);
-                    break;
-                }
-            }
-            GUILayout.EndHorizontal();
-            //GUILayout.EndArea();
-        
-        }*/
-
         void SetError(string errorMessage)
         {
             m_State = State.Error;

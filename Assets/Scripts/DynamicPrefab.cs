@@ -15,7 +15,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
     [RequireComponent(typeof(ARTrackedImageManager))]
     public class DynamicPrefab : MonoBehaviour
     {
-        GameObject m_OriginalPrefab;
+        public FadeInOut m_Fade;
+       
         int passo = 0;
         bool first = true;
 
@@ -46,7 +47,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 var noPrefab = (GameObject)Resources.Load(m_Ordem[passo][2].Trim()); 
                 Debug.Log(noPrefab);
 
-                Debug.Log("Tipo ordem: "+m_Ordem.GetType());
+                /*Debug.Log("Tipo ordem: "+m_Ordem.GetType());
                 for(var i=0; i<m_Ordem.Count; i++){ 
                     Debug.Log("primero: "+m_Ordem[i][1]+"]");
                     Debug.Log("segundo: "+m_Ordem[i][2]+"]"); }
@@ -57,7 +58,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                         Debug.Log("Tipo l2: "+l2.GetType());}
                 }
                 Debug.Log("yesprefab: "+yesPrefab.GetType());
-                Debug.Log("passo jklkljk: "+m_Ordem[passo][2].GetType());
+                Debug.Log("passo jklkljk: "+m_Ordem[passo][2].GetType()); */
 
                 foreach (var referenceImage in library) {
                     Debug.Log(referenceImage.name);
@@ -91,16 +92,18 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 List<string> virgulas = new List<string>(line.Split(','));
                 m_Ordem.Add(virgulas);
-                foreach(var l in virgulas) {
+                /*foreach(var l in virgulas) {
                     Debug.Log("virgulas: "+l);
                     Debug.Log("Tipo virgulas: "+ virgulas.GetType());
                     Debug.Log("Tipo cada: "+ l.GetType());
-                }
+                }*/
             }
 
             ChangePrefab();
             
         }
+
+        
 
         public void nextStep() {
             passo +=1;
@@ -109,9 +112,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         public void lastStep() {
-            passo -=1;
-            Debug.Log("passo no last: "+passo);
-            m_State = State.MudaPrefab;
+            if (passo!=0) {
+                passo -=1;
+                Debug.Log("passo no last: "+passo);
+                m_State = State.MudaPrefab;
+            } else {
+                Debug.Log("vai fadear!!");
+                StartCoroutine(m_Fade.initFade()); 
+                Debug.Log("fadeou!!");           
+            }
         }
 
         void SetError(string errorMessage)

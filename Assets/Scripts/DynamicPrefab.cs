@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using System.IO;
@@ -19,6 +20,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
        
         int passo = 0;
         bool first = true;
+
+        public TMPro.TMP_Text score;
 
         public TextAsset ordem;
         List<List<string>> m_Ordem;
@@ -131,6 +134,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void Update()
         {
+            score.text = "Passo: " + passo.ToString();
             switch (m_State)
             {
                 case State.MudaPrefab:

@@ -700,6 +700,7 @@ GameObject:
   - component: {fileID: 530602160}
   - component: {fileID: 530602163}
   - component: {fileID: 530602164}
+  - component: {fileID: 530602165}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -782,8 +783,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Fade: {fileID: 947733591}
+  scene: {fileID: 530602165}
   score: {fileID: 1577186457}
   ordem: {fileID: 4900000, guid: 53a13c31fa30b424d8a9e8e57e1b503d, type: 3}
+--- !u!114 &530602165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530602159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3064068518dc9b944b22ff97cf41322a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &612703031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1612,15 +1626,15 @@ RectTransform:
   m_GameObject: {fileID: 1435971376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.86249, y: 0.86249, z: 0.86249}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 661977491}
   m_Father: {fileID: 947733590}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: -325}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -0, y: 315}
   m_SizeDelta: {x: 430.1763, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1577186455

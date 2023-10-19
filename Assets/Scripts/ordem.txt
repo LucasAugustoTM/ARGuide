@@ -2,3 +2,4 @@ botao,Placa1,vaB
 cnc,Placa2,vaC
 botao,Placa3,vaB
 cnc,Placa4,vaC
+cnc,Placa5,vaC

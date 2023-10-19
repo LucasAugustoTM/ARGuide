@@ -17,6 +17,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
     public class DynamicPrefab : MonoBehaviour
     {
         public FadeInOut m_Fade;
+
+        public ChangeScene scene;
        
         int passo = 0;
         bool first = true;
@@ -111,7 +113,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
         public void nextStep() {
             passo +=1;
             Debug.Log("passo no next: "+passo);
-            m_State = State.MudaPrefab;
+            Debug.Log("Count next: "+m_Ordem.Count);
+            if(passo==m_Ordem.Count)
+                scene.EndApp();
+            else    
+                m_State = State.MudaPrefab;
         }
 
         public void lastStep() {

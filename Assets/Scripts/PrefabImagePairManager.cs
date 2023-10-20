@@ -61,16 +61,19 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void OnEnable()
         {
+            Debug.Log("Enablou!");
             m_TrackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
         }
 
         void OnDisable()
         {
+            Debug.Log("Disablou!");
             m_TrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
         }
 
          void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
         {
+            Debug.Log("Estourou OnTrackImagesChanged");
             foreach (var trackedImage in eventArgs.added)
             {
                 // Give the initial image a reasonable default scale
@@ -84,14 +87,25 @@ namespace UnityEngine.XR.ARFoundation.Samples
         public void InitPrefabForReferenceImage(XRReferenceImage referenceImage, GameObject alternativePrefab)
         {
             m_PrefabsDictionary.Add(referenceImage.guid, alternativePrefab);
+            foreach(var key in m_PrefabsDictionary.Keys) {
+                Debug.Log("guid da nova: "+ m_PrefabsDictionary[key]);
+            }
+            Debug.Log("---------------------------");    
         }
 
        
         
         void AssignPrefab(ARTrackedImage trackedImage)
         {
-            if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
+            Debug.Log("Assignar!");
+            if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab)) {
                 m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
+
+                foreach(var k in m_Instantiated.Keys) {
+                    Debug.Log("Instantiated dps de mudar imagem: "+m_Instantiated[k]);
+                }
+                Debug.Log("$$$$$$$$$$$$$$$$$$$$$$$$$$$");      
+            }    
         }
         
         public GameObject GetPrefabForReferenceImage(XRReferenceImage referenceImage)
@@ -104,9 +118,18 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 m_Instantiated[referenceImage.guid] = Instantiate(alternativePrefab, instantiatedPrefab.transform.parent);
                 Destroy(instantiatedPrefab);
+                foreach(var key in m_PrefabsDictionary.Keys) {
+                    Debug.Log("PrefabDict dps de Set: "+m_PrefabsDictionary[key]);
+                }      
+                foreach(var k in m_Instantiated.Keys) {
+                    Debug.Log("Instantiated dps de Set: "+m_Instantiated[k]);
+                }      
+                Debug.Log("######################################");
             }
         }
-
+        public void Limpa() {
+            m_TrackedImageManager.referenceLibrary = null;
+        }
         /*public void Clear() {
             foreach(var key in m_Instantiated.Keys) {
                 m_Instantiated.TryGetValue(key, out var instantiatedPrefab);
@@ -116,7 +139,5 @@ namespace UnityEngine.XR.ARFoundation.Samples
             Debug.Log("aaaaaaaaaa");
             //OnDisable();
         }*/
-
-
     }
 }

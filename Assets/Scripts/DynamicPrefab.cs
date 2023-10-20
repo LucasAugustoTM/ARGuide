@@ -67,27 +67,44 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
                 foreach (var referenceImage in library) {
                     Debug.Log(referenceImage.name);
-                    if(String.Equals(m_Ordem[passo][0], referenceImage.name)) {
+                    if(first==true) {
+                        if(String.Equals(m_Ordem[passo][0], referenceImage.name)) {
+                            manager.InitPrefabForReferenceImage(referenceImage, yesPrefab);
+                            Debug.Log("Inicializou o certo!"); 
+                        }else{
+                            manager.InitPrefabForReferenceImage(referenceImage, noPrefab);
+                            Debug.Log("Inicializou o errado!"); 
+                        }  
+                    }else{
+                        if(String.Equals(m_Ordem[passo][0], referenceImage.name)) {
+                            Debug.Log("Nome certo!");
+                            manager.SetPrefabForReferenceImage(referenceImage, yesPrefab);
+                        }else{
+                            Debug.Log("Nome errado!");
+                            manager.SetPrefabForReferenceImage(referenceImage, noPrefab);
+                        } 
+                    }
+                        
+                /*    if(String.Equals(m_Ordem[passo][0], referenceImage.name)) {
                         Debug.Log("Nome certo!");
                         if(first==true) {
                             manager.InitPrefabForReferenceImage(referenceImage, yesPrefab);
                             first = false;
                             Debug.Log("Inicializou o certo!"); }
-                        else
-                            manager.SetPrefabForReferenceImage(referenceImage, yesPrefab);
+                        else {
+                            manager.SetPrefabForReferenceImage(referenceImage, yesPrefab); }
                     }else{
                         Debug.Log("Nome errado!");
                         if(first==true) {
                             manager.InitPrefabForReferenceImage(referenceImage, noPrefab);
                             first = false;
                             Debug.Log("Inicializou o errado!"); }
-                        else
-                            manager.SetPrefabForReferenceImage(referenceImage, noPrefab);
-                    }    
+                        else {
+                            manager.SetPrefabForReferenceImage(referenceImage, noPrefab); }    
+                    } */
                 }
             }
         }
-
         void Start() {
 
             Debug.Log("passo no start: "+passo);
@@ -97,15 +114,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 List<string> virgulas = new List<string>(line.Split(','));
                 m_Ordem.Add(virgulas);
-                /*foreach(var l in virgulas) {
+                foreach(var l in virgulas) {
                     Debug.Log("virgulas: "+l);
                     Debug.Log("Tipo virgulas: "+ virgulas.GetType());
                     Debug.Log("Tipo cada: "+ l.GetType());
-                }*/
+                }
             }
 
             ChangePrefab();
-            
+            first = false;
         }
 
         
@@ -140,7 +157,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void Update()
         {
-            score.text = "Passo: " + passo.ToString();
+            score.text = "Passo: " + (passo+1).ToString();
             switch (m_State)
             {
                 case State.MudaPrefab:

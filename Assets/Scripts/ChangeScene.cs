@@ -27,7 +27,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         public void RestartApp() {
             Debug.Log("aa");
-            subsystem.imageLibrary = null;
+            //subsystem.imageLibrary = null;
             SceneManager.LoadScene(1);
             //var reseta = GetComponent<PrefabImagePairManager>();
             Debug.Log("xxxxx");

@@ -51,14 +51,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
             get => m_ImageLibrary;
             set => m_ImageLibrary = value;
         }
-        
 
         void Awake()
         {
+            
             m_PrefabsDictionary = new Dictionary<Guid, GameObject>();
             m_TrackedImageManager = GetComponent<ARTrackedImageManager>();
-            //foreach (var referenceImage in subsystems.imageLibrary)
-            //    Debug.LogFormat("Image guid no  inicio Awake: {0}", referenceImage.guid);
+            Debug.Log("poggers");
+            foreach (ARTrackedImage referenceImage in m_TrackedImageManager.trackables) {
+                Debug.Log("poggers");
+                Debug.LogFormat("awake imagem: {0}", referenceImage.size); }  
         }
 
         void OnEnable()
@@ -76,14 +78,26 @@ namespace UnityEngine.XR.ARFoundation.Samples
          void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
         {
             Debug.Log("Estourou OnTrackImagesChanged");
+            foreach (ARTrackedImage referenceImage in m_TrackedImageManager.trackables) {
+                Debug.LogFormat("ontracked inicio imagem: {0}", referenceImage.nativePtr); }  
+
             foreach (var trackedImage in eventArgs.added)
             {
-                // Give the initial image a reasonable default scale
-                var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
-                trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
-                //Debug.LogFormat("Image guid no OnTracked: {0}", trackedImage.guid);
-                AssignPrefab(trackedImage);
+                Debug.Log("added: "+trackedImage);
             }
+
+            if(m_TrackedImageManager.trackables.count == 0) {
+                foreach (var trackedImage in eventArgs.added)
+                {
+                    // Give the initial image a reasonable default scale
+                    var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
+                    trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
+                    //Debug.LogFormat("Image guid no OnTracked: {0}", trackedImage.guid);
+                    AssignPrefab(trackedImage);
+                }
+            }    
+            foreach (ARTrackedImage referenceImage in m_TrackedImageManager.trackables) {
+                Debug.LogFormat("Ontracked fim: {0}", referenceImage.nativePtr); }  
             //foreach (var referenceImage in m_ImageLibrary)
             //    Debug.LogFormat("Image guid no OnTracked: {0}", referenceImage.guid);
         }

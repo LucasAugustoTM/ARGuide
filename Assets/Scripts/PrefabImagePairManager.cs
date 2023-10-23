@@ -57,6 +57,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             m_PrefabsDictionary = new Dictionary<Guid, GameObject>();
             m_TrackedImageManager = GetComponent<ARTrackedImageManager>();
+            //foreach (var referenceImage in subsystems.imageLibrary)
+            //    Debug.LogFormat("Image guid no  inicio Awake: {0}", referenceImage.guid);
         }
 
         void OnEnable()
@@ -79,8 +81,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 // Give the initial image a reasonable default scale
                 var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
                 trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
+                //Debug.LogFormat("Image guid no OnTracked: {0}", trackedImage.guid);
                 AssignPrefab(trackedImage);
             }
+            //foreach (var referenceImage in m_ImageLibrary)
+            //    Debug.LogFormat("Image guid no OnTracked: {0}", referenceImage.guid);
         }
 
 
@@ -128,7 +133,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
         public void Limpa() {
-            m_TrackedImageManager.referenceLibrary = null;
+            //m_TrackedImageManager.referenceLibrary = null;
+            //RuntimeReferenceImageLibrary runtimeLibrary = m_TrackedImageManager.CreateRuntimeLibrary(m_ImageLibrary);
+            //m_TrackedImageManager.referenceLibrary = m_ImageLibrary;
+            Debug.Log("ccccccc");
         }
         /*public void Clear() {
             foreach(var key in m_Instantiated.Keys) {

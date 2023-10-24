@@ -114,11 +114,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 List<string> virgulas = new List<string>(line.Split(','));
                 m_Ordem.Add(virgulas);
-                foreach(var l in virgulas) {
+                /*foreach(var l in virgulas) {
                     Debug.Log("virgulas: "+l);
                     Debug.Log("Tipo virgulas: "+ virgulas.GetType());
                     Debug.Log("Tipo cada: "+ l.GetType());
-                }
+                }*/
             }
 
             ChangePrefab();

@@ -52,41 +52,53 @@ namespace UnityEngine.XR.ARFoundation.Samples
             set => m_ImageLibrary = value;
         }
 
+        private bool first = true;
+
+        //public DynamicPrefab d;
+
         void Awake()
         {
             
             m_PrefabsDictionary = new Dictionary<Guid, GameObject>();
             m_TrackedImageManager = GetComponent<ARTrackedImageManager>();
             Debug.Log("poggers");
-            foreach (ARTrackedImage referenceImage in m_TrackedImageManager.trackables) {
+            /*foreach (ARTrackedImage referenceImage in m_TrackedImageManager.trackables) {
                 Debug.Log("poggers");
                 Debug.LogFormat("awake imagem: {0}", referenceImage.size); }  
+            Debug.Log("Trackable count no awake: " +m_TrackedImageManager.trackables.count);   */ 
+
         }
 
         void OnEnable()
         {
             Debug.Log("Enablou!");
+            Debug.Log("Trackable count no enable inicio: " +m_TrackedImageManager.trackables.count); 
             m_TrackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
+            Debug.Log("Trackable count no enable fim: " +m_TrackedImageManager.trackables.count); 
         }
 
         void OnDisable()
         {
             Debug.Log("Disablou!");
+            //Debug.Log("Trackable count no disable inicio: " +m_TrackedImageManager.trackables.count); 
             m_TrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
+            //Debug.Log("Trackable count no disable fim: " +m_TrackedImageManager.trackables.count); 
         }
 
          void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
         {
-            Debug.Log("Estourou OnTrackImagesChanged");
+            /*Debug.Log("Estourou OnTrackImagesChanged");
             foreach (ARTrackedImage referenceImage in m_TrackedImageManager.trackables) {
-                Debug.LogFormat("ontracked inicio imagem: {0}", referenceImage.nativePtr); }  
+                Debug.LogFormat("ontracked inicio imagem: {0}", referenceImage.nativePtr); }  */
 
-            foreach (var trackedImage in eventArgs.added)
+            Debug.Log("Trackable count no ontracked inicio: " +m_TrackedImageManager.trackables.count); 
+
+            /*foreach (var trackedImage in eventArgs.added)
             {
                 Debug.Log("added: "+trackedImage);
-            }
+            }*/
 
-            if(m_TrackedImageManager.trackables.count == 0) {
+            //if(m_TrackedImageManager.trackables.count != imageLibrary.count) {
                 foreach (var trackedImage in eventArgs.added)
                 {
                     // Give the initial image a reasonable default scale
@@ -95,16 +107,32 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     //Debug.LogFormat("Image guid no OnTracked: {0}", trackedImage.guid);
                     AssignPrefab(trackedImage);
                 }
+            /*}else{
+                Debug.Log("eeee");
             }    
             foreach (ARTrackedImage referenceImage in m_TrackedImageManager.trackables) {
-                Debug.LogFormat("Ontracked fim: {0}", referenceImage.nativePtr); }  
+                Debug.LogFormat("Ontracked fim: {0}", referenceImage.nativePtr); }  */
+
+            Debug.Log("Trackable count no ontracked fim: "+m_TrackedImageManager.trackables.count);     
             //foreach (var referenceImage in m_ImageLibrary)
             //    Debug.LogFormat("Image guid no OnTracked: {0}", referenceImage.guid);
+
+            if((m_TrackedImageManager.trackables.count == imageLibrary.count) & first==true) {
+                //int i=0;
+                foreach(var referenceImage in m_TrackedImageManager.trackables) {
+                    Debug.Log("trackableid: "+referenceImage.trackableId);
+                    Debug.Log("destroy: "+referenceImage.destroyOnRemoval);
+                    referenceImage.destroyOnRemoval = true;
+                    //m_TrackedImageManager.DestroyPendingTrackable(referenceImage.trackableId);
+                }
+            }
+            first = false;
         }
 
 
         public void InitPrefabForReferenceImage(XRReferenceImage referenceImage, GameObject alternativePrefab)
         {
+            Debug.Log("Trackable count no init: " +m_TrackedImageManager.trackables.count); 
             m_PrefabsDictionary.Add(referenceImage.guid, alternativePrefab);
             foreach(var key in m_PrefabsDictionary.Keys) {
                 Debug.Log("guid da nova: "+ m_PrefabsDictionary[key]);

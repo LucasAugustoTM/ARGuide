@@ -29,13 +29,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
             Debug.Log("aa");
             //subsystem.imageLibrary = null;
             SceneManager.LoadScene(1);
-            //var reseta = GetComponent<PrefabImagePairManager>();
             Debug.Log("xxxxx");
             //reseta.Limpa();
             Debug.Log("bbbbbb");
         }
 
         public void EndApp() {
+            //var reseta = GetComponent<ARTrackedImageManager>();
+            //Destroy(reseta);
             SceneManager.LoadScene(2);
         }
 

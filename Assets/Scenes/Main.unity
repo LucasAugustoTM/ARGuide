@@ -135,13 +135,14 @@ GameObject:
   - component: {fileID: 130247004}
   - component: {fileID: 130247003}
   - component: {fileID: 130247002}
+  - component: {fileID: 130247005}
   m_Layer: 5
   m_Name: Clear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &130247001
 RectTransform:
   m_ObjectHideFlags: 0
@@ -151,15 +152,15 @@ RectTransform:
   m_GameObject: {fileID: 130247000}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.38492, y: 2.38492, z: 2.38492}
+  m_LocalScale: {x: 1.6634815, y: 1.6634815, z: 1.6634815}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 612703032}
   m_Father: {fileID: 947733590}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 262, y: 169}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 13, y: 72}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &130247002
@@ -209,7 +210,7 @@ MonoBehaviour:
       - m_Target: {fileID: 530602163}
         m_TargetAssemblyTypeName: UnityEngine.XR.ARFoundation.Samples.PrefabImagePairManager,
           Assembly-CSharp
-        m_MethodName: Clear
+        m_MethodName: Limpa
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -257,6 +258,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130247000}
   m_CullTransparentMesh: 1
+--- !u!225 &130247005
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130247000}
+  m_Enabled: 1
+  m_Alpha: 0.8
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &148605344
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +714,7 @@ GameObject:
   - component: {fileID: 530602163}
   - component: {fileID: 530602164}
   - component: {fileID: 530602165}
+  - component: {fileID: 530602167}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -754,7 +768,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ImageLibrary: {fileID: 11400000, guid: 935934c6394116c4189c828156c7e40e, type: 2}
-  d: {fileID: 530602164}
 --- !u!114 &530602164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -799,6 +812,20 @@ MonoBehaviour:
     type: 2}
   m_MaxNumberOfMovingImages: 0
   m_TrackedImagePrefab: {fileID: 0}
+--- !u!114 &530602167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530602159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ff162f26df9324bb93832b5df850fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  url: https://raw.githubusercontent.com/GRV-PUCRS/OpenDatasets/main/config.txt
+  saveFileName: file.txt
 --- !u!1 &612703031
 GameObject:
   m_ObjectHideFlags: 0

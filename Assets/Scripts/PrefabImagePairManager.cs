@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.ARFoundation;
+using System.Collections;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -53,20 +54,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         private bool first = true;
-
-        //public DynamicPrefab d;
-
         void Awake()
         {
             
             m_PrefabsDictionary = new Dictionary<Guid, GameObject>();
             m_TrackedImageManager = GetComponent<ARTrackedImageManager>();
-            Debug.Log("poggers");
-            /*foreach (ARTrackedImage referenceImage in m_TrackedImageManager.trackables) {
-                Debug.Log("poggers");
-                Debug.LogFormat("awake imagem: {0}", referenceImage.size); }  
-            Debug.Log("Trackable count no awake: " +m_TrackedImageManager.trackables.count);   */ 
-
         }
 
         void OnEnable()
@@ -87,46 +79,35 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
          void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
         {
-            /*Debug.Log("Estourou OnTrackImagesChanged");
-            foreach (ARTrackedImage referenceImage in m_TrackedImageManager.trackables) {
-                Debug.LogFormat("ontracked inicio imagem: {0}", referenceImage.nativePtr); }  */
 
             Debug.Log("Trackable count no ontracked inicio: " +m_TrackedImageManager.trackables.count); 
 
-            /*foreach (var trackedImage in eventArgs.added)
+            foreach (var trackedImage in eventArgs.added)
             {
-                Debug.Log("added: "+trackedImage);
-            }*/
-
-            //if(m_TrackedImageManager.trackables.count != imageLibrary.count) {
-                foreach (var trackedImage in eventArgs.added)
-                {
-                    // Give the initial image a reasonable default scale
-                    var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
-                    trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
-                    //Debug.LogFormat("Image guid no OnTracked: {0}", trackedImage.guid);
-                    AssignPrefab(trackedImage);
-                }
-            /*}else{
-                Debug.Log("eeee");
-            }    
-            foreach (ARTrackedImage referenceImage in m_TrackedImageManager.trackables) {
-                Debug.LogFormat("Ontracked fim: {0}", referenceImage.nativePtr); }  */
+                // Give the initial image a reasonable default scale
+                /*var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
+                trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
+                AssignPrefab(trackedImage);*/
+                DadosImagem(trackedImage);
+            }
 
             Debug.Log("Trackable count no ontracked fim: "+m_TrackedImageManager.trackables.count);     
-            //foreach (var referenceImage in m_ImageLibrary)
-            //    Debug.LogFormat("Image guid no OnTracked: {0}", referenceImage.guid);
 
-            if((m_TrackedImageManager.trackables.count == imageLibrary.count) & first==true) {
-                //int i=0;
-                foreach(var referenceImage in m_TrackedImageManager.trackables) {
-                    Debug.Log("trackableid: "+referenceImage.trackableId);
-                    Debug.Log("destroy: "+referenceImage.destroyOnRemoval);
-                    referenceImage.destroyOnRemoval = true;
-                    //m_TrackedImageManager.DestroyPendingTrackable(referenceImage.trackableId);
+            if((m_TrackedImageManager.trackables.count >= imageLibrary.count) & first==true) {
+                foreach(var trackedImage in m_TrackedImageManager.trackables) {
+                    /*var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
+                    trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
+                    AssignPrefab(trackedImage);*/
+                    DadosImagem(trackedImage);
                 }
             }
+        }
+
+        void DadosImagem(ARTrackedImage trackedImage) {
             first = false;
+            var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
+            trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
+            AssignPrefab(trackedImage);
         }
 
 
@@ -174,20 +155,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 Debug.Log("######################################");
             }
         }
-        public void Limpa() {
-            //m_TrackedImageManager.referenceLibrary = null;
-            //RuntimeReferenceImageLibrary runtimeLibrary = m_TrackedImageManager.CreateRuntimeLibrary(m_ImageLibrary);
-            //m_TrackedImageManager.referenceLibrary = m_ImageLibrary;
-            Debug.Log("ccccccc");
+
+        IEnumerator Espera() {
+            yield return new WaitForSecondsRealtime(1.5f);
+            m_TrackedImageManager.SetTrackablesActive(true);
         }
-        /*public void Clear() {
-            foreach(var key in m_Instantiated.Keys) {
-                m_Instantiated.TryGetValue(key, out var instantiatedPrefab);
-                m_Instantiated[key] = Instantiate(instantiatedPrefab, instantiatedPrefab.transform.parent);
-                Destroy(instantiatedPrefab);
-            }
-            Debug.Log("aaaaaaaaaa");
-            //OnDisable();
-        }*/
+        public void Limpa() {
+            Debug.Log("Limpou!");
+            m_TrackedImageManager.SetTrackablesActive(false);
+            StartCoroutine(Espera());
+            Debug.Log("Limpou 2!");
+        }
     }
 }

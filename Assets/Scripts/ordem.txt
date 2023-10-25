@@ -3,3 +3,8 @@ cnc,Placa2,vaC
 botao,Placa3,vaB
 cnc,Placa4,vaC
 cnc,Placa5,vaC
+cnc,Placa6,vaC
+botao,Placa7,vaB
+botao,Placa8,vaB
+botao,Placa9,vaB
+cnc,Placa10,vaC

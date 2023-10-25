@@ -10,25 +10,27 @@ using UnityEngine.SceneManagement;
 using Unity.XR.CoreUtils;
 using Unity.Jobs;
 
-namespace UnityEngine.XR.ARFoundation.Samples
-{
+
     public sealed class ChangeScene : MonoBehaviour
      
     {
-        public void StartApp() {
+        public void DownloadScene() {
             SceneManager.LoadScene(1);
         }
 
-        public void RestartApp() {
-            SceneManager.LoadScene(1);
+        public void DownloadLink() {
+            Application.OpenURL("https://grande.ideia.pucrs.br/forms.php?form=1154");
+        }
+
+        public void StartApp() {
+            SceneManager.LoadScene(2);
         }
 
         public void EndApp() {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(3);
         }
 
         public void QuitApp() {
             Application.Quit();
         }
     }
-}

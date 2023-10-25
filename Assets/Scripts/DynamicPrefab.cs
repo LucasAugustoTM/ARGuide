@@ -79,6 +79,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
             Debug.Log("passo no start: "+passo);
             m_Ordem = ordem;
 
+            foreach(var l in m_Ordem) {
+                foreach(var l2 in l) {
+                    Debug.Log("conteudo: "+l2);
+                }
+            }
+
             ChangePrefab();
             first = false;
         }

@@ -65,7 +65,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void Build(string fileContent) {
 
             string[] linesInFile = fileContent.Split('\n');
-            linesInFile = linesInFile.SkipLast(1).ToArray(); 
 
             foreach (string line in linesInFile) {
                 //Debug.Log("split: "+line);

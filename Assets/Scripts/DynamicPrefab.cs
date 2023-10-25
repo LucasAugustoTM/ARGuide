@@ -25,8 +25,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         public TMPro.TMP_Text score;
 
-        public TextAsset ordem;
-        List<List<string>> m_Ordem;
+        //public TextAsset ordem;
+        public List<List<string>> m_Ordem;
 
         enum State
         {
@@ -52,19 +52,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 var noPrefab = (GameObject)Resources.Load(m_Ordem[passo][2].Trim()); 
                 Debug.Log(noPrefab);
 
-                /*Debug.Log("Tipo ordem: "+m_Ordem.GetType());
-                for(var i=0; i<m_Ordem.Count; i++){ 
-                    Debug.Log("primero: "+m_Ordem[i][1]+"]");
-                    Debug.Log("segundo: "+m_Ordem[i][2]+"]"); }
-                foreach (var l in m_Ordem) {
-                     Debug.Log("Tipo l: "+l.GetType());
-                     foreach (var l2 in l) {
-                        Debug.Log("l2: "+l2);
-                        Debug.Log("Tipo l2: "+l2.GetType());}
-                }
-                Debug.Log("yesprefab: "+yesPrefab.GetType());
-                Debug.Log("passo jklkljk: "+m_Ordem[passo][2].GetType()); */
-
                 foreach (var referenceImage in library) {
                     Debug.Log(referenceImage.name);
                     if(first==true) {
@@ -83,43 +70,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
                             Debug.Log("Nome errado!");
                             manager.SetPrefabForReferenceImage(referenceImage, noPrefab);
                         } 
-                    }
-                        
-                /*    if(String.Equals(m_Ordem[passo][0], referenceImage.name)) {
-                        Debug.Log("Nome certo!");
-                        if(first==true) {
-                            manager.InitPrefabForReferenceImage(referenceImage, yesPrefab);
-                            first = false;
-                            Debug.Log("Inicializou o certo!"); }
-                        else {
-                            manager.SetPrefabForReferenceImage(referenceImage, yesPrefab); }
-                    }else{
-                        Debug.Log("Nome errado!");
-                        if(first==true) {
-                            manager.InitPrefabForReferenceImage(referenceImage, noPrefab);
-                            first = false;
-                            Debug.Log("Inicializou o errado!"); }
-                        else {
-                            manager.SetPrefabForReferenceImage(referenceImage, noPrefab); }    
-                    } */
+                    }                     
                 }
             }
         }
-        void Start() {
+        public void Comeca(List<List<string>> ordem) {
 
             Debug.Log("passo no start: "+passo);
-            m_Ordem = new List<List<string>>();
-            string[] linesInFile = ordem.text.Split('\n');
-            foreach (string line in linesInFile)
-            {
-                List<string> virgulas = new List<string>(line.Split(','));
-                m_Ordem.Add(virgulas);
-                /*foreach(var l in virgulas) {
-                    Debug.Log("virgulas: "+l);
-                    Debug.Log("Tipo virgulas: "+ virgulas.GetType());
-                    Debug.Log("Tipo cada: "+ l.GetType());
-                }*/
-            }
+            m_Ordem = ordem;
 
             ChangePrefab();
             first = false;
@@ -187,3 +145,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
     }
 }
+
+
+/*Debug.Log("Tipo ordem: "+m_Ordem.GetType());
+                for(var i=0; i<m_Ordem.Count; i++){ 
+                    Debug.Log("primero: "+m_Ordem[i][1]+"]");
+                    Debug.Log("segundo: "+m_Ordem[i][2]+"]"); }
+                foreach (var l in m_Ordem) {
+                     Debug.Log("Tipo l: "+l.GetType());
+                     foreach (var l2 in l) {
+                        Debug.Log("l2: "+l2);
+                        Debug.Log("Tipo l2: "+l2.GetType());}
+                }
+                Debug.Log("yesprefab: "+yesPrefab.GetType());
+                Debug.Log("passo jklkljk: "+m_Ordem[passo][2].GetType()); */

@@ -64,9 +64,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void OnEnable()
         {
             Debug.Log("Enablou!");
-            Debug.Log("Trackable count no enable inicio: " +m_TrackedImageManager.trackables.count); 
+            //Debug.Log("Trackable count no enable inicio: " +m_TrackedImageManager.trackables.count); 
             m_TrackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
-            Debug.Log("Trackable count no enable fim: " +m_TrackedImageManager.trackables.count); 
+            //Debug.Log("Trackable count no enable fim: " +m_TrackedImageManager.trackables.count); 
         }
 
         void OnDisable()
@@ -84,20 +84,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             foreach (var trackedImage in eventArgs.added)
             {
-                // Give the initial image a reasonable default scale
-                /*var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
-                trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
-                AssignPrefab(trackedImage);*/
                 DadosImagem(trackedImage);
             }
 
             Debug.Log("Trackable count no ontracked fim: "+m_TrackedImageManager.trackables.count);     
 
             if((m_TrackedImageManager.trackables.count >= imageLibrary.count) & first==true) {
+                Debug.Log("caiu! ");
                 foreach(var trackedImage in m_TrackedImageManager.trackables) {
-                    /*var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
-                    trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
-                    AssignPrefab(trackedImage);*/
                     DadosImagem(trackedImage);
                 }
             }
@@ -105,6 +99,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void DadosImagem(ARTrackedImage trackedImage) {
             first = false;
+            // Give the initial image a reasonable default scale
             var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
             trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
             AssignPrefab(trackedImage);

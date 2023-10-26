@@ -8,3 +8,11 @@ botao,Placa7,vaB
 botao,Placa8,vaB
 botao,Placa9,vaB
 cnc,Placa10,vaC
+interruptor,Placa11,vaI
+botao,Placa12,vaB
+botao,Placa13,vaB
+botao,Placa14,vaB
+botao,Placa15,vaB
+interruptor,Placa16,vaI
+cnc,Placa17,vaC
+cnc,Placa18,vaC

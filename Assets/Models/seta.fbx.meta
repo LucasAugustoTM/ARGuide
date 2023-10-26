@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bbf2374d51338be4da50b950ae14552a
+guid: 3c096eb3e0915fb4bbe39662806e821a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,13 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Borda
-    second: {fileID: 2100000, guid: 472c94bd85258ae42810edb959087b39, type: 2}
+      name: Cor Dentro
+    second: {fileID: 2100000, guid: 0f20e3423e6d0d844b5cce49aa4e60c9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Centro
-    second: {fileID: 2100000, guid: 26d6dde845c6fa247aa5b58214988f17, type: 2}
+      name: Cor Fora
+    second: {fileID: 2100000, guid: bb46147a0f894f544949acd998f30f1a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

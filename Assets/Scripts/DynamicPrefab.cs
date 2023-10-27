@@ -74,10 +74,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 }
             }
         }
-        public void Comeca(List<List<string>> ordem) {
+        public void Start() {
 
             Debug.Log("passo no start: "+passo);
-            m_Ordem = ordem;
+            m_Ordem =  FileManager.Instance.ordem;
 
             foreach(var l in m_Ordem) {
                 foreach(var l2 in l) {

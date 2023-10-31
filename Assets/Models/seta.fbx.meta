@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3c096eb3e0915fb4bbe39662806e821a
+guid: e4a1306a4d5870944a750670c01bb916
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Cor Dentro
-    second: {fileID: 2100000, guid: 0f20e3423e6d0d844b5cce49aa4e60c9, type: 2}
+    second: {fileID: 2100000, guid: 7a8b5093e88481b4584f3e7666d72011, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Cor Fora
-    second: {fileID: 2100000, guid: bb46147a0f894f544949acd998f30f1a, type: 2}
+    second: {fileID: 2100000, guid: e9c8ad082172df84798a54882e5805f3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -80,14 +80,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
          void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
         {
 
-            Debug.Log("Trackable count no ontracked inicio: " +m_TrackedImageManager.trackables.count); 
+            //Debug.Log("Trackable count no ontracked inicio: " +m_TrackedImageManager.trackables.count); 
 
             foreach (var trackedImage in eventArgs.added)
             {
                 DadosImagem(trackedImage);
             }
 
-            Debug.Log("Trackable count no ontracked fim: "+m_TrackedImageManager.trackables.count);     
+            //Debug.Log("Trackable count no ontracked fim: "+m_TrackedImageManager.trackables.count);     
 
             if((m_TrackedImageManager.trackables.count >= imageLibrary.count) & first==true) {
                 Debug.Log("caiu! ");
@@ -100,7 +100,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void DadosImagem(ARTrackedImage trackedImage) {
             first = false;
             // Give the initial image a reasonable default scale
-            var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
+            var minLocalScalar = (Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2) * 1.2f;
             trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
             AssignPrefab(trackedImage);
         }

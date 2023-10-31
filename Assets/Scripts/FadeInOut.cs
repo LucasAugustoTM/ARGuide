@@ -39,4 +39,8 @@ public class FadeInOut : MonoBehaviour
             fout = true;
         }    
     }
+
+    public void Pronto() {
+        StartCoroutine(initFade());
+    }
 }

@@ -51,28 +51,16 @@ using UnityEngine.SceneManagement;
             printOrdem(defaultOrder);
             Debug.Log("***************************");
             printOrdem(ordem);
-            Debug.Log("ooooooooooooooooooooooooooooooooooooooooo");
         }
 
 
         public void StartDownload()
         {
-            //ordem = new List<List<string>>();
-
-            // Cria caminho completo para o arquivo texto
-            //fullPath = Path.Combine(Application.persistentDataPath, saveFileName);
-
             // Carrega arquivo.
             LoadFile(fullPath);
 
             // Baixa e salva arquivo texto no dispositivo
              StartCoroutine(GetText(OnDownladCompleted));
-            //Debug.Log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-            //printOrdem(ordem);
-            //Debug.Log("Voltou tempo: " + Time.time);
-            //SceneManager.LoadScene(2);
-            //LoadFile(fullPath);
-
         }
 
         // Baixa arquivo da url. Recebe como argumento um metodo para tratar o conteudo do arquivo apos o download
@@ -81,9 +69,7 @@ using UnityEngine.SceneManagement;
             UnityWebRequest www = new UnityWebRequest(url);
             www.downloadHandler = new DownloadHandlerBuffer();
 
-            Debug.Log("inicio web tempo: " + Time.time);
             yield return www.SendWebRequest();
-            Debug.Log("final web tempo: " + Time.time);
 
             // Se ocorrer um erro no download
             if (www.result != UnityWebRequest.Result.Success)
@@ -95,7 +81,6 @@ using UnityEngine.SceneManagement;
                 // Chama metodo para lidar com conteudo do arquivo baixado
                 onDonwloadCompleted?.Invoke(www.downloadHandler.text);
             }
-            Debug.Log("final tempo: " + Time.time);
             SceneManager.LoadScene(2);
         }
 
@@ -103,12 +88,9 @@ using UnityEngine.SceneManagement;
         public void OnDownladCompleted(string fileContent)
         {
             ordem.Clear();
-            //ordem = new List<List<string>>();
-            Debug.Log("99999");
             Build(fileContent,ordem);
             SaveFile(fullPath, fileContent);
             flag_Download = false;
-            //SceneManager.LoadScene(2);
         }
 
         void Build(string fileContent, List<List<string>> order) {
@@ -125,9 +107,6 @@ using UnityEngine.SceneManagement;
                     Debug.Log("Tipo cada: "+ l.GetType());
                 }*/
             }
-
-            //var dynamic = GetComponent<DynamicPrefab>();
-            //dynamic.Comeca(ordem);
         }
 
         // Salva o arquivo
@@ -152,19 +131,6 @@ using UnityEngine.SceneManagement;
         }
 
         public void ResetaPadrao() {
-            /*Debug.Log("@@@@@@");
-            Debug.Log("default: "+defaultOrder.Count);
-            for(var i=0; i<defaultOrder.Count; i++) { 
-                Debug.Log("primero: "+defaultOrder[i][1]+"]");
-                Debug.Log("segundo: "+defaultOrder[i][2]+"]"); 
-            }
-            foreach (var l in defaultOrder) {
-                Debug.Log("Tipo l: "+l.GetType());
-                foreach (var l2 in l) {
-                    Debug.Log("l2: "+l2);
-                    Debug.Log("Tipo l2: "+l2.GetType());
-                }
-            }*/
 
             printOrdem(defaultOrder);
             Debug.Log("wwwwwwwwwwwwwwwwwww");
@@ -172,19 +138,6 @@ using UnityEngine.SceneManagement;
             ordem = new List<List<string>>(defaultOrder);
             Debug.Log("wwwwwwwwwwwwwwwwwww");
             printOrdem(ordem);
-
-            /*for(var i=0; i<ordem.Count; i++) { 
-                Debug.Log("primero: "+ordem[i][1]+"]");
-                Debug.Log("segundo: "+ordem[i][2]+"]"); 
-            }
-            foreach (var l in ordem) {
-                Debug.Log("Tipo l: "+l.GetType());
-                foreach (var l2 in l) {
-                    Debug.Log("l2: "+l2);
-                    Debug.Log("Tipo l2: "+l2.GetType());
-                }
-            }
-            Debug.Log("&&&&&&&&&&&&&&&");*/
         }
 
         public void uga() {

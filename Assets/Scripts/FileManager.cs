@@ -40,20 +40,22 @@ using UnityEngine.SceneManagement;
             DontDestroyOnLoad(gameObject);
             
             Scene currentScene = SceneManager.GetActiveScene();
-            ordem = new List<List<string>>();
             defaultOrder = new List<List<string>>();
             flag_Download = false;
 
             Build(defaulText.text,defaultOrder);
-            ordem = defaultOrder;
+            ordem = new List<List<string>>(defaultOrder);
 
             fullPath = Path.Combine(Application.persistentDataPath, saveFileName);
 
-            Debug.Log("alaaaaaaaa");
+            printOrdem(defaultOrder);
+            Debug.Log("***************************");
+            printOrdem(ordem);
+            Debug.Log("ooooooooooooooooooooooooooooooooooooooooo");
         }
 
 
-        IEnumerator Start()
+        public void StartDownload()
         {
             //ordem = new List<List<string>>();
 
@@ -64,8 +66,11 @@ using UnityEngine.SceneManagement;
             LoadFile(fullPath);
 
             // Baixa e salva arquivo texto no dispositivo
-            yield return StartCoroutine(GetText(OnDownladCompleted));
-
+             StartCoroutine(GetText(OnDownladCompleted));
+            //Debug.Log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            //printOrdem(ordem);
+            //Debug.Log("Voltou tempo: " + Time.time);
+            //SceneManager.LoadScene(2);
             //LoadFile(fullPath);
 
         }
@@ -76,7 +81,9 @@ using UnityEngine.SceneManagement;
             UnityWebRequest www = new UnityWebRequest(url);
             www.downloadHandler = new DownloadHandlerBuffer();
 
+            Debug.Log("inicio web tempo: " + Time.time);
             yield return www.SendWebRequest();
+            Debug.Log("final web tempo: " + Time.time);
 
             // Se ocorrer um erro no download
             if (www.result != UnityWebRequest.Result.Success)
@@ -88,16 +95,19 @@ using UnityEngine.SceneManagement;
                 // Chama metodo para lidar com conteudo do arquivo baixado
                 onDonwloadCompleted?.Invoke(www.downloadHandler.text);
             }
+            Debug.Log("final tempo: " + Time.time);
+            SceneManager.LoadScene(2);
         }
 
         // exibe conteudo do arquivo e o salva localmente
         public void OnDownladCompleted(string fileContent)
         {
             ordem.Clear();
-            ordem = new List<List<string>>();
+            //ordem = new List<List<string>>();
             Debug.Log("99999");
             Build(fileContent,ordem);
             SaveFile(fullPath, fileContent);
+            flag_Download = false;
             //SceneManager.LoadScene(2);
         }
 
@@ -109,11 +119,11 @@ using UnityEngine.SceneManagement;
                 Debug.Log("split: "+line);
                 List<string> virgulas = new List<string>(line.Split(','));
                 order.Add(virgulas);
-                foreach(var l in virgulas) {
+                /*foreach(var l in virgulas) {
                     Debug.Log("virgulas: "+l);
                     Debug.Log("Tipo virgulas: "+ virgulas.GetType());
                     Debug.Log("Tipo cada: "+ l.GetType());
-                }
+                }*/
             }
 
             //var dynamic = GetComponent<DynamicPrefab>();
@@ -142,7 +152,7 @@ using UnityEngine.SceneManagement;
         }
 
         public void ResetaPadrao() {
-            Debug.Log("@@@@@@");
+            /*Debug.Log("@@@@@@");
             Debug.Log("default: "+defaultOrder.Count);
             for(var i=0; i<defaultOrder.Count; i++) { 
                 Debug.Log("primero: "+defaultOrder[i][1]+"]");
@@ -154,12 +164,16 @@ using UnityEngine.SceneManagement;
                     Debug.Log("l2: "+l2);
                     Debug.Log("Tipo l2: "+l2.GetType());
                 }
-            }
+            }*/
 
-            ordem = defaultOrder;
+            printOrdem(defaultOrder);
             Debug.Log("wwwwwwwwwwwwwwwwwww");
-            
-            for(var i=0; i<ordem.Count; i++) { 
+            printOrdem(ordem);
+            ordem = new List<List<string>>(defaultOrder);
+            Debug.Log("wwwwwwwwwwwwwwwwwww");
+            printOrdem(ordem);
+
+            /*for(var i=0; i<ordem.Count; i++) { 
                 Debug.Log("primero: "+ordem[i][1]+"]");
                 Debug.Log("segundo: "+ordem[i][2]+"]"); 
             }
@@ -170,6 +184,18 @@ using UnityEngine.SceneManagement;
                     Debug.Log("Tipo l2: "+l2.GetType());
                 }
             }
-            Debug.Log("&&&&&&&&&&&&&&&");
+            Debug.Log("&&&&&&&&&&&&&&&");*/
+        }
+
+        public void uga() {
+            Debug.Log("uga buga");
+        }
+
+        void printOrdem(List<List<string>> order) {
+            foreach(var line in order) {
+                foreach(var l in line) {
+                    Debug.Log("elemento: "+l);
+                }
+            }
         }
     }

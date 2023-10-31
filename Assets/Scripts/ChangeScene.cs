@@ -32,13 +32,21 @@ using System.Linq;
 
         public void StartApp() {
             Debug.Log("flag: "+FileManager.Instance.flag_Download);
-            /*if (FileManager.Instance.flag_Download == true) {
-                FileManager.Instance.flag_Download = false;
-                FileManager.Instance.GetText(FileManager.Instance.OnDownladCompleted);
+            if (FileManager.Instance.flag_Download == true) {
+                FileManager.Instance.StartDownload();
+                Debug.Log("flag2: "+FileManager.Instance.flag_Download);
+                /*while (FileManager.Instance.flag_Download == true) {
+                    Debug.Log("Downloading...");
+                }
+                SceneManager.LoadScene(2);*/
             }else{
                 SceneManager.LoadScene(2);
-            }*/
-            SceneManager.LoadScene(2);
+            }
+            //SceneManager.LoadScene(2);
+        }
+
+        public void ResetaFile() {
+            FileManager.Instance.ResetaPadrao();
         }
 
         public void EndApp() {

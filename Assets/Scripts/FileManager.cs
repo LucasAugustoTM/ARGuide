@@ -9,13 +9,14 @@ using UnityEngine.Networking;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
-namespace UnityEngine.XR.ARFoundation.Samples
-{
+
     public class FileManager: MonoBehaviour
     {
         string url = "https://grande.ideia.pucrs.br/getPrefab.php";
         private string saveFileName = "file.txt";
         private string fullPath;
+
+        public bool flag_Download;
 
         public List<List<string>> ordem;
 
@@ -41,8 +42,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
             Scene currentScene = SceneManager.GetActiveScene();
             ordem = new List<List<string>>();
             defaultOrder = new List<List<string>>();
+            flag_Download = false;
 
             Build(defaulText.text,defaultOrder);
+            ordem = defaultOrder;
+
+            fullPath = Path.Combine(Application.persistentDataPath, saveFileName);
 
             Debug.Log("alaaaaaaaa");
         }
@@ -53,7 +58,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             //ordem = new List<List<string>>();
 
             // Cria caminho completo para o arquivo texto
-            fullPath = Path.Combine(Application.persistentDataPath, saveFileName);
+            //fullPath = Path.Combine(Application.persistentDataPath, saveFileName);
 
             // Carrega arquivo.
             LoadFile(fullPath);
@@ -66,7 +71,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         // Baixa arquivo da url. Recebe como argumento um metodo para tratar o conteudo do arquivo apos o download
-        IEnumerator GetText(Action<string> onDonwloadCompleted)
+        public IEnumerator GetText(Action<string> onDonwloadCompleted)
         {
             UnityWebRequest www = new UnityWebRequest(url);
             www.downloadHandler = new DownloadHandlerBuffer();
@@ -88,9 +93,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
         // exibe conteudo do arquivo e o salva localmente
         public void OnDownladCompleted(string fileContent)
         {
+            ordem.Clear();
+            ordem = new List<List<string>>();
+            Debug.Log("99999");
             Build(fileContent,ordem);
-
             SaveFile(fullPath, fileContent);
+            //SceneManager.LoadScene(2);
         }
 
         void Build(string fileContent, List<List<string>> order) {
@@ -98,14 +106,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
             string[] linesInFile = fileContent.Split('\n');
 
             foreach (string line in linesInFile) {
-                //Debug.Log("split: "+line);
+                Debug.Log("split: "+line);
                 List<string> virgulas = new List<string>(line.Split(','));
                 order.Add(virgulas);
-                /*foreach(var l in virgulas) {
+                foreach(var l in virgulas) {
                     Debug.Log("virgulas: "+l);
                     Debug.Log("Tipo virgulas: "+ virgulas.GetType());
                     Debug.Log("Tipo cada: "+ l.GetType());
-                }*/
+                }
             }
 
             //var dynamic = GetComponent<DynamicPrefab>();
@@ -134,6 +142,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         public void ResetaPadrao() {
+            Debug.Log("@@@@@@");
+            Debug.Log("default: "+defaultOrder.Count);
             for(var i=0; i<defaultOrder.Count; i++) { 
                 Debug.Log("primero: "+defaultOrder[i][1]+"]");
                 Debug.Log("segundo: "+defaultOrder[i][2]+"]"); 
@@ -163,4 +173,3 @@ namespace UnityEngine.XR.ARFoundation.Samples
             Debug.Log("&&&&&&&&&&&&&&&");
         }
     }
-}

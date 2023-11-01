@@ -100,7 +100,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void DadosImagem(ARTrackedImage trackedImage) {
             first = false;
             // Give the initial image a reasonable default scale
-            var minLocalScalar = (Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2) * 1.2f;
+            var minLocalScalar = (Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2) * 1.15f;
             trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
             AssignPrefab(trackedImage);
         }
@@ -152,6 +152,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         IEnumerator Espera() {
+            foreach(var trackedImage in m_TrackedImageManager.trackables) {
+                    m_Instantiated[trackedImage.referenceImage.guid].transform.position = m_PrefabsDictionary[trackedImage.referenceImage.guid].transform.position;
+                }
             yield return new WaitForSecondsRealtime(1.5f);
             m_TrackedImageManager.SetTrackablesActive(true);
         }

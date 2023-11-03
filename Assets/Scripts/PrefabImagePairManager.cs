@@ -95,6 +95,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     DadosImagem(trackedImage);
                 }
             }
+
+            // Disable instantiated prefabs that are no longer being actively tracked
+            foreach (var trackedImage in eventArgs.updated) { 
+                m_Instantiated[trackedImage.referenceImage.guid] 
+                    .SetActive(trackedImage.trackingState == TrackingState.Tracking); 
+            }
         }
 
         void DadosImagem(ARTrackedImage trackedImage) {
@@ -152,9 +158,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         IEnumerator Espera() {
-            foreach(var trackedImage in m_TrackedImageManager.trackables) {
-                    m_Instantiated[trackedImage.referenceImage.guid].transform.position = m_PrefabsDictionary[trackedImage.referenceImage.guid].transform.position;
-                }
+            //foreach(var trackedImage in m_TrackedImageManager.trackables) {
+            //        m_Instantiated[trackedImage.referenceImage.guid].transform.position = m_PrefabsDictionary[trackedImage.referenceImage.guid].transform.position;
+            //        //trackedImage.trackingstate.None;
+            //    }
             yield return new WaitForSecondsRealtime(1.5f);
             m_TrackedImageManager.SetTrackablesActive(true);
         }

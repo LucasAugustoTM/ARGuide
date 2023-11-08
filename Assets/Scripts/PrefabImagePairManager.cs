@@ -157,7 +157,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-        IEnumerator Espera() {
+        /*IEnumerator Espera() {
             //foreach(var trackedImage in m_TrackedImageManager.trackables) {
             //        m_Instantiated[trackedImage.referenceImage.guid].transform.position = m_PrefabsDictionary[trackedImage.referenceImage.guid].transform.position;
             //        //trackedImage.trackingstate.None;
@@ -170,6 +170,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_TrackedImageManager.SetTrackablesActive(false);
             StartCoroutine(Espera());
             Debug.Log("Limpou 2!");
-        }
+        } */
     }
 }

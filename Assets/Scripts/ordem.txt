@@ -14,5 +14,6 @@ botao,Placa13,vaB
 botao,Placa14,vaB
 botao,Placa15,vaB
 interruptor,Placa16,vaI
-cnc,Placa17,vaC
+botao,Placa17,vaB
 cnc,Placa18,vaC
+cnc,Placa19,vaC

@@ -41,9 +41,9 @@ MonoBehaviour:
       m_GuidLow: 5475511325782306197
       m_GuidHigh: 2817765076987644853
     m_SerializedTextureGuid:
-      m_GuidLow: 4324761695454692908
-      m_GuidHigh: 12599546452698396536
-    m_Size: {x: 0.104775, y: 0.099509925}
+      m_GuidLow: 9999148986462433175
+      m_GuidHigh: 109837702861578075
+    m_Size: {x: 0.104775, y: 0.09981059}
     m_SpecifySize: 1
     m_Name: interruptor
-    m_Texture: {fileID: 2800000, guid: 33cb062ca3d93c0478f71e54be94daae, type: 3}
+    m_Texture: {fileID: 2800000, guid: 824cef971d068ac45b5f020ecf388601, type: 3}

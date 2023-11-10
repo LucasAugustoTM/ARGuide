@@ -6,6 +6,7 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using System.IO;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine.Networking;
 
 namespace UnityEngine.XR.ARFoundation.Samples
@@ -23,9 +24,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         int passo = 0;
         bool first = true;
 
-        public TMPro.TMP_Text score;
+        public GameObject score;
 
-        //public TextAsset ordem;
+        //public TMPro.TMP_Text score;
+
         public List<List<string>> m_Ordem;
 
         enum State
@@ -99,6 +101,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 scene.EndApp();
             else    
                 m_State = State.MudaPrefab;
+            var scoreColor = score.GetComponent<Image>();
+            StartCoroutine(Blink(scoreColor,Color.green));   
         }
 
         public void lastStep() {
@@ -111,6 +115,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 StartCoroutine(m_Fade.initFade()); 
                 Debug.Log("fadeou!!");           
             }
+            var scoreColor = score.GetComponent<Image>();
+            StartCoroutine(Blink(scoreColor,Color.yellow));
+        }
+
+        IEnumerator Blink(Image image, Color c) {
+            image.color = c;
+            yield return new WaitForSeconds(0.3f);
+            image.color = Color.white;
         }
 
         void SetError(string errorMessage)
@@ -121,7 +133,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void Update()
         {
-            score.text = "Passo: " + (passo+1).ToString();
+            var scoreText = score.transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>();
+            scoreText.text = "Passo: " + (passo+1).ToString();
             switch (m_State)
             {
                 case State.MudaPrefab:

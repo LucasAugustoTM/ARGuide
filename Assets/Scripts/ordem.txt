@@ -8,6 +8,7 @@ cnc,Placa6,vaC
 botao,Placa7,vaB
 botao,Placa8,vaB
 botao,Placa9,vaB
+botao,PlacaAviso2,vaB
 cnc,Placa10,vaC
 interruptor,Placa11,vaI
 botao,Placa12,vaB

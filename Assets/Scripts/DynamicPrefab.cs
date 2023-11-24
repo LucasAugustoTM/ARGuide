@@ -26,8 +26,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         public GameObject score;
 
-        //public TMPro.TMP_Text score;
-
         public List<List<string>> m_Ordem;
 
         enum State
@@ -46,7 +44,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
             var library = manager.imageLibrary;
 
             Debug.Log("passo no change: "+passo);
-            Debug.Log("ordem.Count no change: "+passo);
             if((passo >= 0) & (passo < m_Ordem.Count)) {
                 var yesPrefab = (GameObject)Resources.Load(m_Ordem[passo][1]); 
                 Debug.Log(yesPrefab);
@@ -55,21 +52,20 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 Debug.Log(noPrefab);
 
                 foreach (var referenceImage in library) {
-                    Debug.Log(referenceImage.name);
                     if(first==true) {
                         if(String.Equals(m_Ordem[passo][0], referenceImage.name)) {
                             manager.InitPrefabForReferenceImage(referenceImage, yesPrefab);
-                            Debug.Log("Inicializou o certo!"); 
+                            //Debug.Log("Inicializou o certo!"); 
                         }else{
                             manager.InitPrefabForReferenceImage(referenceImage, noPrefab);
-                            Debug.Log("Inicializou o errado!"); 
+                            //Debug.Log("Inicializou o errado!"); 
                         }  
                     }else{
                         if(String.Equals(m_Ordem[passo][0], referenceImage.name)) {
-                            Debug.Log("Nome certo!");
+                            //Debug.Log("Nome certo!");
                             manager.SetPrefabForReferenceImage(referenceImage, yesPrefab);
                         }else{
-                            Debug.Log("Nome errado!");
+                            //Debug.Log("Nome errado!");
                             manager.SetPrefabForReferenceImage(referenceImage, noPrefab);
                         } 
                     }                     
@@ -78,15 +74,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
         public void Start() {
 
-            Debug.Log("passo no start: "+passo);
             m_Ordem =  FileManager.Instance.ordem;
-
-            foreach(var l in m_Ordem) {
-                foreach(var l2 in l) {
-                    Debug.Log("conteudo: "+l2);
-                }
-            }
-
             ChangePrefab();
             first = false;
         }
@@ -95,8 +83,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         public void nextStep() {
             passo +=1;
-            Debug.Log("passo no next: "+passo);
-            Debug.Log("Count next: "+m_Ordem.Count);
             if(passo==m_Ordem.Count)
                 scene.EndApp();
             else    
@@ -108,12 +94,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         public void lastStep() {
             if (passo!=0) {
                 passo -=1;
-                Debug.Log("passo no last: "+passo);
                 m_State = State.MudaPrefab;
             } else {
-                Debug.Log("vai fadear!!");
-                StartCoroutine(m_Fade.initFade()); 
-                Debug.Log("fadeou!!");           
+                StartCoroutine(m_Fade.initFade());        
             }
             var scoreColor = score.GetComponent<Image>();
             StartCoroutine(Blink(scoreColor,Color.yellow));

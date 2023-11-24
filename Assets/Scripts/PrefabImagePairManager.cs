@@ -63,18 +63,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void OnEnable()
         {
-            Debug.Log("Enablou!");
-            //Debug.Log("Trackable count no enable inicio: " +m_TrackedImageManager.trackables.count); 
             m_TrackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
-            //Debug.Log("Trackable count no enable fim: " +m_TrackedImageManager.trackables.count); 
         }
 
         void OnDisable()
         {
-            Debug.Log("Disablou!");
-            //Debug.Log("Trackable count no disable inicio: " +m_TrackedImageManager.trackables.count); 
             m_TrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
-            //Debug.Log("Trackable count no disable fim: " +m_TrackedImageManager.trackables.count); 
         }
 
          void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
@@ -90,7 +84,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
             //Debug.Log("Trackable count no ontracked fim: "+m_TrackedImageManager.trackables.count);     
 
             if((m_TrackedImageManager.trackables.count >= imageLibrary.count) & first==true) {
-                Debug.Log("caiu! ");
                 foreach(var trackedImage in m_TrackedImageManager.trackables) {
                     DadosImagem(trackedImage);
                 }
@@ -98,7 +91,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             // Disable instantiated prefabs that are no longer being actively tracked
             foreach (var trackedImage in eventArgs.updated) { 
-                //StartCoroutine(Espera(trackedImage));
                 m_Instantiated[trackedImage.referenceImage.guid] 
                     .SetActive(trackedImage.trackingState == TrackingState.Tracking); 
             }
@@ -117,9 +109,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             Debug.Log("Trackable count no init: " +m_TrackedImageManager.trackables.count); 
             m_PrefabsDictionary.Add(referenceImage.guid, alternativePrefab);
-            foreach(var key in m_PrefabsDictionary.Keys) {
-                Debug.Log("guid da nova: "+ m_PrefabsDictionary[key]);
-            }
             Debug.Log("---------------------------");    
         }
 
@@ -127,14 +116,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
         
         void AssignPrefab(ARTrackedImage trackedImage)
         {
-            Debug.Log("Assignar!");
             if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab)) {
                 m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
 
-                foreach(var k in m_Instantiated.Keys) {
+                /*foreach(var k in m_Instantiated.Keys) {
                     Debug.Log("Instantiated dps de mudar imagem: "+m_Instantiated[k]);
                 }
-                Debug.Log("$$$$$$$$$$$$$$$$$$$$$$$$$$$");      
+                Debug.Log("$$$$$$$$$$$$$$$$$$$$$$$$$$$");*/      
             }    
         }
         
@@ -148,13 +136,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 m_Instantiated[referenceImage.guid] = Instantiate(alternativePrefab, instantiatedPrefab.transform.parent);
                 Destroy(instantiatedPrefab);
-                foreach(var key in m_PrefabsDictionary.Keys) {
-                    Debug.Log("PrefabDict dps de Set: "+m_PrefabsDictionary[key]);
-                }      
-                foreach(var k in m_Instantiated.Keys) {
+                /*foreach(var k in m_Instantiated.Keys) {
                     Debug.Log("Instantiated dps de Set: "+m_Instantiated[k]);
                 }      
-                Debug.Log("######################################");
+                Debug.Log("######################################");*/
             }
         }
 

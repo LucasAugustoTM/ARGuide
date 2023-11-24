@@ -18,7 +18,6 @@ using System.Linq;
      
     {
         public void Start() {
-                Debug.Log("pog");
         }
 
         public void DownloadScene() {
@@ -31,7 +30,7 @@ using System.Linq;
         }
 
         public void StartApp() {
-            Debug.Log("flag: "+FileManager.Instance.flag_Download);
+            //Debug.Log("flag: "+FileManager.Instance.flag_Download);
             if (FileManager.Instance.flag_Download == true) {
                 FileManager.Instance.StartDownload();
             }else{

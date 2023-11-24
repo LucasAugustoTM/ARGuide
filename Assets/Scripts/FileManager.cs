@@ -101,11 +101,6 @@ using UnityEngine.SceneManagement;
                 Debug.Log("split: "+line);
                 List<string> virgulas = new List<string>(line.Split(','));
                 order.Add(virgulas);
-                /*foreach(var l in virgulas) {
-                    Debug.Log("virgulas: "+l);
-                    Debug.Log("Tipo virgulas: "+ virgulas.GetType());
-                    Debug.Log("Tipo cada: "+ l.GetType());
-                }*/
             }
         }
 
@@ -138,10 +133,6 @@ using UnityEngine.SceneManagement;
             ordem = new List<List<string>>(defaultOrder);
             Debug.Log("wwwwwwwwwwwwwwwwwww");
             printOrdem(ordem);
-        }
-
-        public void uga() {
-            Debug.Log("uga buga");
         }
 
         void printOrdem(List<List<string>> order) {

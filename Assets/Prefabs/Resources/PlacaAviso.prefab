@@ -203,7 +203,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Se n\xE3o conseguiu o \xFAltimo passo, afloxe o bico de corte (gire o
     parafuso no sentido anti-hor\xE1rio), levante o bico e o aperte novamente. Utilize
-    as duas m\xE3os (uma m\xE3o no bico e outra no parafuso)."
+    as duas m\xE3os (uma m\xE3o no bico e outra no parafuso)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -402,15 +402,15 @@ RectTransform:
   m_GameObject: {fileID: 8503951367297200225}
   m_LocalRotation: {x: -0.9999949, y: 0.0029264279, z: 0.0013339033, w: -0.000008059665}
   m_LocalPosition: {x: 0, y: 0, z: 0.007}
-  m_LocalScale: {x: 0.012354959, y: 0.012354959, z: 0.012354959}
+  m_LocalScale: {x: 0.015455182, y: 0.015455182, z: 0.015455182}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8574441756876303729}
   m_LocalEulerAnglesHint: {x: 0, y: -179.847, z: 180.335}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0127, y: -0.0079}
-  m_SizeDelta: {x: 154.8682, y: 100}
+  m_AnchoredPosition: {x: -0.067, y: -0.055}
+  m_SizeDelta: {x: 95.474, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2841058399343180411
 CanvasRenderer:

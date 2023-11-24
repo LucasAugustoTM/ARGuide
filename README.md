@@ -12,6 +12,7 @@ ao normal em runtime no menu de "Configuração de Ordem". Há no momento uma re
 Compatível com a versão 2022.3.8f1 da Unity e superiores.
 
 Modelos de placas padrão: https://vtluma.carrd.co/
+
 Imagens padrão originais: <a href="https://www.flaticon.com/br/icones-gratis/diversos" title="diversos ícones">Diversos ícones criados por IconBaandar - Flaticon</a>
 <a href="https://www.flaticon.com/br/icones-gratis/maquina" title="máquina ícones">Máquina ícones criados por Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/br/icones-gratis/interruptor" title="interruptor ícones">Interruptor ícones criados por Vector Clans - Flaticon</a>

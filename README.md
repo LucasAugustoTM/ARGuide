@@ -1,5 +1,7 @@
 # ARGuide
 
+![placas](arguideplacas.png)
+
 ---- PORTUGÛES ----
 
 Este projeto em Unity implementa um guia de operação de uma máquina de corte à LASER em Realidade Aumentada para dispositivos móveis, desenvolvido como o Trabalho de Conclusão de Curso
@@ -35,6 +37,11 @@ Original default images: <a href="https://www.flaticon.com/br/icones-gratis/dive
 <a href="https://www.flaticon.com/br/icones-gratis/maquina" title="máquina ícones">Máquina ícones criados por Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/br/icones-gratis/interruptor" title="interruptor ícones">Interruptor ícones criados por Vector Clans - Flaticon</a>
 
+<p align="center">
+<<img src="arguidetelastart.jpeg" width=400>
+<img src="arguidetelaconfig.jpeg" width=400>
+<img src="arguidetelafim.jpeg" width=400>
+</p>
 
 
 

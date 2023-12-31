@@ -1,7 +1,7 @@
 # ARGuide
 
 <p align="center">
-<img src="arguideplacas.png" width=300>
+<img src="arguideplacas.png" width=400>
 </p>
 
 ---- PORTUGÛES ----
@@ -40,8 +40,8 @@ Original default images: <a href="https://www.flaticon.com/br/icones-gratis/dive
 <a href="https://www.flaticon.com/br/icones-gratis/interruptor" title="interruptor ícones">Interruptor ícones criados por Vector Clans - Flaticon</a>
 
 <p align="center">
-<img src="arguidetelastart.jpeg" width=300>
-<img src="arguidetelaconfig.jpeg" width=300>
+<img src="arguidetelastart.jpeg" width=200>
+<img src="arguidetelaconfig.jpeg" width=200>
 <img src="arguidetelafim.jpeg" width=300>
 </p>
 

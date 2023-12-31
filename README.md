@@ -40,7 +40,7 @@ Original default images: <a href="https://www.flaticon.com/br/icones-gratis/dive
 <a href="https://www.flaticon.com/br/icones-gratis/interruptor" title="interruptor ícones">Interruptor ícones criados por Vector Clans - Flaticon</a>
 
 <p align="center">
-<img src="arguidegif.png" width=400>
+<img src="arguidegif.gif" width=400>
 </p>
 
 <p align="center">

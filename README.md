@@ -38,9 +38,9 @@ Original default images: <a href="https://www.flaticon.com/br/icones-gratis/dive
 <a href="https://www.flaticon.com/br/icones-gratis/interruptor" title="interruptor ícones">Interruptor ícones criados por Vector Clans - Flaticon</a>
 
 <p align="center">
-<<img src="arguidetelastart.jpeg" width=400>
-<img src="arguidetelaconfig.jpeg" width=400>
-<img src="arguidetelafim.jpeg" width=400>
+<<img src="arguidetelastart.jpeg">
+<img src="arguidetelaconfig.jpeg">
+<img src="arguidetelafim.jpeg">
 </p>
 
 

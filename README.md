@@ -4,7 +4,7 @@
 <img src="arguideplacas.png" width=400>
 </p>
 
----- PORTUGÛES ----
+---- PORTUGUÊS ----
 
 Este projeto em Unity implementa um guia de operação de uma máquina de corte à LASER em Realidade Aumentada para dispositivos móveis, desenvolvido como o Trabalho de Conclusão de Curso
 para o Bacharelado em Ciência da Computação na PUCRS. O algoritmo projeta prefabs sobre imagens especificadas de acordo com uma ordem definida pelo usuário, quando estas imagens são rastreadas
@@ -42,7 +42,7 @@ Original default images: <a href="https://www.flaticon.com/br/icones-gratis/dive
 <p align="center">
 <img src="arguidetelastart.jpeg" width=200>
 <img src="arguidetelaconfig.jpeg" width=200>
-<img src="arguidetelafim.jpeg" width=300>
+<img src="arguidetelafim.jpeg" width=250>
 </p>
 
 

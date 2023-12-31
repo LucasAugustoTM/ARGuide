@@ -42,7 +42,7 @@ Original default images: <a href="https://www.flaticon.com/br/icones-gratis/dive
 <p align="center">
 <img src="arguidetelastart.jpeg" width=200>
 <img src="arguidetelaconfig.jpeg" width=200>
-<img src="arguidetelafim.jpeg" width=250>
+<img src="arguidetelafim.jpeg" width=200>
 </p>
 
 

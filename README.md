@@ -1,7 +1,7 @@
 # ARGuide
 
 <p align="center">
-<img src="arguideplacas.jpeg" width=300>
+<img src="arguideplacas.png" width=300>
 </p>
 
 ---- PORTUGÛES ----

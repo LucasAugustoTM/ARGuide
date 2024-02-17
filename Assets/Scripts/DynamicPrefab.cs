@@ -117,7 +117,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void Update()
         {
             var scoreText = score.transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>();
-            scoreText.text = "Passo: " + (passo+1).ToString();
+            scoreText.text = "Step: " + (passo+1).ToString();
             switch (m_State)
             {
                 case State.MudaPrefab:
